@@ -22,7 +22,7 @@ const register = (params) => {
 };
 
 const hashPassword = (strPass) => {
-    const saltRounds = 'asdasdsad';
+    const saltRounds = 10;
     return new Promise((resolve, reject) => {
         bcrypt.hash(strPass, saltRounds, (err, hash) => {
             if (err) {

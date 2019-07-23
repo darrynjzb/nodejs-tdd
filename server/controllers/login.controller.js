@@ -17,8 +17,7 @@ app.post(`${PREFIX}/register`, async (req, res) => {
     params.fecha_nac = moment(params.fecha_nac, 'YYYY-MM-DD');
 
     try {
-        const password = await UserService.hashPassword(params.password);
-        params.password = password;
+        params.password = await UserService.hashPassword(params.password);
         const user = await UserService.register(params);
 
         res.status(200).send({
