@@ -18,6 +18,8 @@ module.exports = {
         'eol-last': 0,
         'indent': ['error', 4],
         'object-curly-spacing': 0,
-        'comma-dangle': 0
+        'comma-dangle': 0,
+        'brace-style': 0,
+        'block-spacing': 0
     },
 };
