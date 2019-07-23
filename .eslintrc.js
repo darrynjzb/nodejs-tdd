@@ -15,6 +15,8 @@ module.exports = {
         'sourceType': 'module',
     },
     'rules': {
-        'eol-last': 0
+        'eol-last': 0,
+        'indent': ['error', 4],
+        'object-curly-spacing': 0
     },
 };
