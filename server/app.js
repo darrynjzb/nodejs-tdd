@@ -25,6 +25,7 @@ app.use(bodyParser.json());
 app.use(loginController);
 
 const mongoose = require('mongoose');
+mongoose.set('useCreateIndex', true);
 const database = `mongodb://${BD_HOST}:${BD_PORT}/${BD_SCHEMA}`;
 mongoose.connect(database, {useNewUrlParser: true}, (err, res) => {
     if (err) {
