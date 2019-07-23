@@ -17,6 +17,7 @@ module.exports = {
     'rules': {
         'eol-last': 0,
         'indent': ['error', 4],
-        'object-curly-spacing': 0
+        'object-curly-spacing': 0,
+        'comma-dangle': 0
     },
 };

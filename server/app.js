@@ -25,14 +25,15 @@ app.use(bodyParser.json());
 app.use(loginController);
 
 const mongoose = require('mongoose');
-mongoose.connect(`mongodb://${BD_HOST}:${BD_PORT}/${BD_SCHEMA}`, {useNewUrlParser: true}, (err, res) => {
+const database = `mongodb://${BD_HOST}:${BD_PORT}/${BD_SCHEMA}`;
+mongoose.connect(database, {useNewUrlParser: true}, (err, res) => {
     if (err) {
         throw new Error('No se pudo conectar a la base de datos');
     }
 
-    console.log('conectado a la base de datos');
+    console.log(`Database run: ${database}`);
 });
 
 app.listen(SERVER_PORT, SERVER_HOST, () => {
-    console.log(`Run server http://${SERVER_HOST}:${SERVER_PORT}`);
+    console.log(`Run server: http://${SERVER_HOST}:${SERVER_PORT}`);
 });
