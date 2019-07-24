@@ -8,8 +8,26 @@ const UserService = require('../services/user.service');
 
 const PREFIX = '/api/v1';
 
-app.post(`${PREFIX}/login`, (req, res) => {
-    res.send({ data: 'login ok' });
+app.get(`${PREFIX}/login`, async (req, res) => {
+    try {
+        const params = req.body;
+        const user = await UserService.getByUsename(params.username);
+        const passValid = await UserService.comparePassword(params.password, user.password);
+
+        if (!passValid) {
+            throw new Error('Las contraseñas no coinciden');
+        }
+
+        res.status(200).send({
+            data: 'Pass correcto',
+            code: 200
+        });
+    } catch (err) {
+        res.status(404).send({
+            error: err.message,
+            code: 404
+        });
+    }
 });
 
 app.post(`${PREFIX}/register`, async (req, res) => {

@@ -20,6 +20,7 @@ module.exports = {
         'object-curly-spacing': 0,
         'comma-dangle': 0,
         'brace-style': 0,
-        'block-spacing': 0
+        'block-spacing': 0,
+        'no-trailing-spaces': 0
     },
 };

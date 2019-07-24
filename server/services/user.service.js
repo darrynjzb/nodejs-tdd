@@ -13,7 +13,7 @@ const register = (params) => {
     return new Promise((resolve, reject) => {
         user.save((err, resBD) => {
             if (err) {
-                reject(err);
+                reject( new Error(err) );
                 return;
             }
             resolve(resBD);
@@ -26,7 +26,7 @@ const hashPassword = (strPass) => {
     return new Promise((resolve, reject) => {
         bcrypt.hash(strPass, saltRounds, (err, hash) => {
             if (err) {
-                reject(err);
+                reject( new Error(err) );
                 return;
             }
             resolve(hash);
@@ -34,7 +34,38 @@ const hashPassword = (strPass) => {
     });
 };
 
+const comparePassword = (strPassword, hash) => {
+    return new Promise((resolve, reject) => {
+        bcrypt.compare(strPassword, hash, (err, res) => {
+            if (err) {
+                reject( new Error(err) );
+                return;
+            }
+
+            resolve(res);
+        });
+    });
+};
+
+const getByUsename = (username) => {
+    return new Promise((resolve, reject) => {
+        User.where({ username }).findOne((err, res) => {
+            if (err) {
+                reject( new Error(err) );
+                return;
+            }
+            if (!res) {
+                reject( new Error('El username especificado no existe') );
+                return;
+            }
+            resolve(res);
+        });
+    });
+};
+
 module.exports = {
     register,
-    hashPassword
+    hashPassword,
+    getByUsename,
+    comparePassword
 };
