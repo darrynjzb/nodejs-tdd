@@ -5,6 +5,7 @@ const app = express();
 const moment = require('moment');
 
 const UserService = require('../services/user.service');
+const JwtService = require('../services/jwt.service');
 
 const PREFIX = '/api/v1';
 
@@ -18,8 +19,10 @@ app.get(`${PREFIX}/login`, async (req, res) => {
             throw new Error('Las contraseñas no coinciden');
         }
 
+        const token = await JwtService.generateToken(user);
+        
         res.status(200).send({
-            data: 'Pass correcto',
+            token,
             code: 200
         });
     } catch (err) {
