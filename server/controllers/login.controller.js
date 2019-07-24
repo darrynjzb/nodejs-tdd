@@ -26,9 +26,9 @@ app.get(`${PREFIX}/login`, async (req, res) => {
             code: 200
         });
     } catch (err) {
-        res.status(404).send({
+        res.status(401).send({
             error: err.message,
-            code: 404
+            code: 401
         });
     }
 });
