@@ -7,6 +7,8 @@ const moment = require('moment');
 const UserService = require('../services/user.service');
 const JwtService = require('../services/jwt.service');
 
+const AuthMiddleware = require('../middlewares/auth.middleware');
+
 const PREFIX = '/api/v1';
 
 app.get(`${PREFIX}/login`, async (req, res) => {
@@ -33,7 +35,7 @@ app.get(`${PREFIX}/login`, async (req, res) => {
     }
 });
 
-app.post(`${PREFIX}/register`, async (req, res) => {
+app.post(`${PREFIX}/register`, AuthMiddleware.verifyToken, async (req, res) => {
     const params = req.body;
     params.fecha_nac = moment(params.fecha_nac, 'YYYY-MM-DD');
 

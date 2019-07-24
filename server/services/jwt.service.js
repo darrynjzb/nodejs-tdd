@@ -7,7 +7,7 @@ const generateToken = (user) => {
     return new Promise((resolve, reject) => {
         const payload = {
             user,
-            now: moment().unix(),
+            iat: moment().unix(),
             exp: moment().add(30, 'd').unix()
         };
 
@@ -22,6 +22,20 @@ const generateToken = (user) => {
     });
 };
 
+const validateToken = (token) => {
+    return new Promise((resolve, reject) => {
+        jwt.verify(token, SECRET_JWT, (err, decoded) => {
+            if (err) {
+                reject( new Error(`Token inválido: ${err}`) );
+                return;
+            }
+
+            resolve(decoded);
+        });
+    });
+};
+
 module.exports = {
-    generateToken
+    generateToken,
+    validateToken
 };

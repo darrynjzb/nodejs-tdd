@@ -21,6 +21,7 @@ module.exports = {
         'comma-dangle': 0,
         'brace-style': 0,
         'block-spacing': 0,
-        'no-trailing-spaces': 0
+        'no-trailing-spaces': 0,
+        'max-len': 0
     },
 };

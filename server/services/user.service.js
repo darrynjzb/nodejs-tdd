@@ -49,7 +49,7 @@ const comparePassword = (strPassword, hash) => {
 
 const getByUsename = (username) => {
     return new Promise((resolve, reject) => {
-        User.where({ username }).findOne((err, res) => {
+        User.findOne({username}).exec((err, res) => {
             if (err) {
                 reject( new Error(err) );
                 return;

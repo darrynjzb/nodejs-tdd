@@ -22,6 +22,12 @@ const UserSchema = new Schema({
     }
 });
 
+UserSchema.methods.toJSON = function() {
+    const obj = this.toObject();
+    delete obj.password;
+    return obj;
+};
+
 const User = mongoose.model('User', UserSchema);
 
 module.exports = User;
